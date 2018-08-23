@@ -18,9 +18,13 @@ provider:
 
 functions:
   signup:
-    handler: handler.signup
+    handler: functions/handler.signup
     events:
       - http: POST signup
+  info:
+    handler: functions/handler.info
+    events:
+      - http: GET info
 
 
 

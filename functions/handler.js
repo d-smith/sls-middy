@@ -10,8 +10,9 @@ const processSignup = (event, context, callback) => {
 
   const response = {
     statusCode: 200,
+    headers: { "Content-Type": "application/json"},
     body: JSON.stringify({
-      message: 'Go Serverless v1.0! Your function executed successfully!'
+      message: 'Sign up succeeded'
     }),
   };
 
@@ -38,4 +39,16 @@ const signup = middy(processSignup)
   .use(validator({inputSchema}))
   .use(httpErrorHandler());
 
-module.exports = {signup}
+const info = (event, context, callback) => {
+  const response = {
+    statusCode: 200,
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify({
+      message: 'Sign up plz'
+    }),
+  };
+
+  callback(null, response);
+};
+
+module.exports = {signup, info}

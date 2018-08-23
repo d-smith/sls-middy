@@ -23,10 +23,11 @@ const inputSchema = {
   properties: {
     body: {
       type: 'object',
+      required: ['first', 'last', 'email'],
       properties: {
-        first: { type: 'string' },
-        last: { type: 'string'},
-        email: { type: 'string'}
+        first: { type: 'string', minLength: 1 },
+        last: { type: 'string', minLength: 1 },
+        email: { type: 'string', minLength: 1 }
       }
     }
   }

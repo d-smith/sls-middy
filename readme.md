@@ -22,3 +22,6 @@ Post your payload thusly:
  ## Tests
 
  * Integration tests - for these, we invoke our lambda handlers directy with stubbed inputs (event, content, callback), and harvest the results in the callback to assert expected behavior.
+ * Acceptance tests - run the tests against live API GW endpoints
+
+ Use `npm run integration-tests` to run the integration tests, and `npm run acceptance-tests` to run the acceptance tests. Note to run the acceptance tests you need to specify the endpoint root and api keys via the TEST_ROOT and TEST_KEY environment variables. The form of test root resembles `https://<apigw-id>.execute-api.us-east-1.amazonaws.com/<stage>`. Both TEST_ROOT and TEST_KEY may be obtained via `sls info`.

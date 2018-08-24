@@ -3,6 +3,9 @@ const _ = require('lodash');
 const rq = require('request');
 const mode    = process.env.TEST_MODE;
 
+const signupHandler = require(`${APP_ROOT}/functions/handler`).signup;
+const infoHandler = require(`${APP_ROOT}/functions/handler`).info;
+
 const postOptions = (opts) => {
     let headers = {};
     headers['Content-Type'] = 'application/json';
@@ -60,8 +63,6 @@ const viaHttp = (relPath, method, opts) => {
             if(err) {
                 reject(err);
             } else {
-//                console.log(`response is ${JSON.stringify(response)}`);
-//                console.log(`body is ${JSON.stringify(body)}`);
                 resolve(response);
             }
         }
@@ -92,36 +93,19 @@ const viaHandler = (event, handler) => {
 };
 
 const we_invoke_signup = (payload) => {
-    if(mode === 'http') {
-        let opts = {
-            body: payload,
-            apiKey: process.env.TEST_KEY
-        }
-
-        return viaHttp('signup', 'POST', opts);
-    } else {
-        let handler = require(`${APP_ROOT}/functions/handler`).signup;
-        let event = {
-            body: payload
-        };
-
-        return viaHandler(event, handler);
-    }
-    
+    let res = 
+        mode === 'http'
+            ? viaHttp('signup', 'POST', {body: payload, apiKey: process.env.TEST_KEY})
+            : viaHandler({body: payload}, signupHandler);
+    return res; 
 }
 
 const we_invoke_get_signup_info = () => {
-    if(mode === 'http') {
-        let opts = {
-            apiKey: process.env.TEST_KEY
-        }
-
-        return viaHttp('info', 'GET', opts);
-    } else {
-        let handler = require(`${APP_ROOT}/functions/handler`).info;
-        return viaHandler({}, handler);
-    }
-    
+    let res =
+        mode === 'http'
+            ? viaHttp('info', 'GET', {apiKey: process.env.TEST_KEY})
+            : viaHandler({}, infoHandler);
+    return res;
 }
   
 

@@ -1,0 +1,13 @@
+{
+    "body": "{}",
+    "resource": "/dev/info",
+    "requestContext": {},
+    "queryStringParameters": {
+      "id": "foo-1111-bar-222"
+    },
+    "headers": {},
+    "pathParameters": {},
+    "httpMethod": "GET",
+    "stageVariables": {},
+    "path": "/dev/info"
+  }

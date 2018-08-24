@@ -16,6 +16,7 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "lodash": "^4.17.10",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "serverless": "^1.30.1"
   }
 }
